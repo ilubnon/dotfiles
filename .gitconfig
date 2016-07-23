@@ -1,0 +1,46 @@
+# .gitconfig
+[user]
+	name = Iter Lubnon
+	email = ilubnon@blackcode-lab.com
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+	autocrlf = input
+[branch]
+	autosetupmerge = true
+[color]
+	ui = auto
+[diff]
+	algorithm = patience
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = ilubnon@gmail.com
+	smtpserverport = 587
+[alias]
+	authors = "!git log --pretty=format:'%an <%ae>' | uniq"
+	remotes = remote -v
+	branches = branch -a
+	tags = tag -l
+	root = rev-parse --show-toplevel
+	st = status -sb
+	ci = commit
+	co = checkout
+	fo = fetch origin
+	fu = fetch upstream
+	po = push origin
+	pu = push upstream
+	unadd = reset
+	unadd-empty = rm -r --cached # git-reset causes "fatal: Failed to resolve 'HEAD' as a valid ref."
+	unstage = reset HEAD
+	uncommit = reset --soft HEAD
+	showstash = stash show -p
+	assume-unchanged = update-index --assume-unchanged
+	no-assume-unchanged = update-index --no-assume-unchanged
+	ls-assume-unchanged = "!git ls-files -v | grep ^h | awk '{print $2}'"
+	last-commit-sha = rev-parse HEAD # Returns a 40-digit commit SHA
+	last-commit-short-sha = rev-parse --short HEAD # Returns a 7-digit commit SHA
+	# Credits for pretty-log go to Palesz - http://stackoverflow.com/users/88355/palesz
+	pretty-log = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[push]
+	default = simple
