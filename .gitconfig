@@ -11,7 +11,10 @@
 [color]
 	ui = auto
 [diff]
-	algorithm = patience
+  algorithm = patience
+  tool = mvimdiff
+[difftool "mvimdiff"]
+  cmd = mvim -f -d \"$LOCAL\" \"$REMOTE\"
 [sendemail]
 	smtpencryption = tls
 	smtpserver = smtp.gmail.com
