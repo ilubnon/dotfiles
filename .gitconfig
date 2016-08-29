@@ -3,7 +3,7 @@
 	name = Iter Lubnon
 	email = ilubnon@blackcode-lab.com
 [core]
-	editor = vim
+	editor = mvim
 	excludesfile = ~/.gitignore
 	autocrlf = input
 [branch]
@@ -17,8 +17,8 @@
   cmd = mvim -f -d \"$LOCAL\" \"$REMOTE\"
 [sendemail]
 	smtpencryption = tls
-	smtpserver = smtp.gmail.com
-	smtpuser = ilubnon@gmail.com
+	smtpserver = smtp.office365.com
+	smtpuser = ilubnon@blackcode-lab.com
 	smtpserverport = 587
 [alias]
 	authors = "!git log --pretty=format:'%an <%ae>' | uniq"
