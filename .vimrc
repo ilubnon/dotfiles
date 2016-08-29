@@ -8,7 +8,7 @@ endif
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 
 let g:vim_bootstrap_langs = "javascript,ruby,haskell,lisp,elixir,python,c,php,html,lua,ocaml,perl,go,erlang"
-let g:vim_bootstrap_editor = "mvim"				" nvim or vim
+let g:vim_bootstrap_editor = "vim"				" nvim or vim
 
 if !filereadable(vimplug_exists)
   echo "Installing Vim-Plug..."
@@ -52,6 +52,10 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'keith/swift.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'chase/vim-ansible-yaml'
+Plug 'ryanoasis/vim-devicons'
+Plug 'SyntaxRange'
+Plug 'tybenz/vimdeck'
+Plug 'ingo-library'
 
 let g:make = 'gmake'
 if system('uname -o') =~ '^GNU/'
@@ -131,6 +135,7 @@ Plug 'tpope/vim-projectionist'
 Plug 'thoughtbot/vim-rspec'
 Plug 'ecomba/vim-ruby-refactoring'
 
+
 "" Include user's extra bundle
 if filereadable(expand("~/.vimrc.local.bundles"))
   source ~/.vimrc.local.bundles
@@ -195,6 +200,7 @@ let g:session_command_aliases = 1
 "*****************************************************************************
 syntax on
 set ruler
+set background=dark
 set relativenumber
 
 let no_buffers_menu=1
@@ -211,7 +217,7 @@ set gfn=Monospace\ 10
 if has("gui_running")
   if has("gui_mac") || has("gui_macvim")
     "set guifont=Menlo:h14
-    set guifont=Ubuntu\ Mono\ Derivative\ Powerline:h15
+    set guifont=Ubuntu\ Mono\ Derivative\ Powerline\ Nerd\ Font:h14
     set transparency=7
   endif
 else
@@ -271,6 +277,10 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#fnamecollapse = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
+
+" vim-devicons
+let g:airline_powerline_fonts = 1
+
 
 "*****************************************************************************
 "" Abbreviations
@@ -363,8 +373,8 @@ set autoread
 "" Mappings
 "*****************************************************************************
 "" Split
-noremap <Leader>h :<C-u>split<CR>
-noremap <Leader>v :<C-u>vsplit<CR>
+noremap <leader>h :<C-u>split<CR>
+noremap <leader>v :<C-u>vsplit<CR>
 
 "" Git
 noremap <Leader>ga :Gwrite<CR>
@@ -458,9 +468,19 @@ noremap <leader>z :bp<CR>
 noremap <leader>q :bp<CR>
 noremap <leader>x :bn<CR>
 noremap <leader>w :bn<CR>
+noremap <leader>] :bn<CR>
+noremap <leader>[ :bp<CR>
 
 "" Close buffer
-noremap <leader>c :bd<CR>
+nmap <leader>t :enew<cr>
+"
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+
 
 "" Clean search (highlight)
 nnoremap <silent> <leader><space> :noh<cr>
@@ -482,7 +502,7 @@ vnoremap K :m '<-2<CR>gv=gv
 "" Open current line on GitHub
 nnoremap <Leader>o :.Gbrowse<CR>
 
-"" Custom configs 
+"" Custom configs
 imap jj <Esc>
 
 
