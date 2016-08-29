@@ -62,14 +62,17 @@ Commands | Descriptions
 `<Control+w>+<hjkl>` | Navigate via split panels
 `<Control>+w+w` | Alternative navigate vim split panels
 `,.` | Set path working directory
-`,w or ,x` | Next buffer navigate
-`,q or ,z` | previous buffer navigate
+`,w or ,x or ,]` | Next buffer navigate
+`,q or ,z or ,[` | previous buffer navigate
 `SHIFT+t` | Create a tab
 `TAB` | next tab navigate
 `SHIFT+TAB` | previous tab navigate
 `,e` | Find and open files
 `,b` | Find file on buffer (open file)
-`,c` | Close active buffer (clone file)
+`,bq` | Close active buffer (clone file)
+`,bl` | list active buffers
+`F2`  | Open tree navigate in actual opened file
+`F2`  | Open tree navigate in actual opened file
 `F2`  | Open tree navigate in actual opened file
 `F3`  | Open/Close tree navigate files
 `F4` | List all class and method, support for python, go, lua, ruby and php
