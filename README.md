@@ -36,6 +36,12 @@ The distribution is designed to work with Vim >= 7.2.
 
 **Warning:** Using the *vim-bootstrap* binary is necessary have the jinja2 (Python package) installed.
 
+### Make zsh to default shell
+
+
+    $ chsh -s $(which zsh)
+
+
 ### Python bundle (optionally)
 
 *pyflakes*
