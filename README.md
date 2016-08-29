@@ -5,13 +5,17 @@ My Dotfiles
 	curl https://raw.githubusercontent.com/ilubnon/dotfiles/master/setup.sh | bash
 
 
-## Pre-requisites Vim
+## Pre-requisites
 
 The distribution is designed to work with Vim >= 7.2.
 
 #### Mac OSX
 
 	$ brew install git ctags
+	$ brew install cpanminus 
+	$ sudo cpanm Net::SMTP::SSL 
+
+  
 
 #### Linux
 
