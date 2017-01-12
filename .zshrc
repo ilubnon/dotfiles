@@ -1,3 +1,5 @@
+#export PATH=/usr/local/bin:$PATH
+
 csp() {
   local IFS=:
   echo "$*"
@@ -17,6 +19,11 @@ PATHS=(
 export PATH=$(csp ${PATHS[@]})
 export EDITOR='mvim'
 export GIT_EDITOR=mvim
+
+
+# export LC_ALL=en_US.UTF-8
+# export LANG=en_US.UTF-8
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -63,7 +70,8 @@ antigen bundle pip
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
-#antigen theme half-life
+#antigen theme robbyrussell/oh-my-zsh themes/half-life
+antigen theme half-life
 
 antigen apply
 
@@ -105,3 +113,4 @@ alias g="git"
 alias v="vim"
 alias ungz="gunzip -k"
 alias fs="stat -f \"%z bytes\""
+
