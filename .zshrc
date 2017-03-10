@@ -79,6 +79,10 @@ unalias rm
 
 #ilubnon
 
+# Aliases for docker
+source ~/.alias-docker.zsh
+
+
 #Recursive delete .DS_Store files
 alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 
@@ -96,7 +100,11 @@ alias grep="/usr/bin/grep --color"
 alias hosts="vim /etc/hosts"
 alias where=which #something i forget :-)
 alias docker-env='eval "$(docker-machine env default)"'
+
+#pastebin
 alias spaste="curl -F 'sprunge=<-' http://sprunge.us"
+alias tb="nc termbin.com 9999" #netcat
+
 alias g="gdb -tui"
 alias irc="TERM=screen-256color screen irssi"
 alias openprivate="ecryptfs-mount-private"
