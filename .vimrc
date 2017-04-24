@@ -103,7 +103,7 @@ Plug 'vim-scripts/slimv.vim'
 Plug 'jelera/vim-javascript-syntax'
 
 "" HTML Bundle
-Plug 'amirh/HTML-AutoCloseTag'
+"" Plug 'amirh/HTML-AutoCloseTag'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
@@ -114,6 +114,7 @@ Plug 'def-lkb/ocp-indent-vim'
 
 "" Python Bundle
 Plug 'davidhalter/jedi-vim'
+Plug 'sirver/ultisnips'
 
 "" Haskell Bundle
 Plug 'eagletmt/neco-ghc'
