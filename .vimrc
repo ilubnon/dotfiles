@@ -220,6 +220,10 @@ if has("gui_running")
     "set guifont=Menlo:h14
     set guifont=Ubuntu\ Mono\ Derivative\ Powerline\ Nerd\ Font:h14
     set transparency=7
+    let $PYTHONHOME="/Library/Frameworks/Python.framework/Versions/3.5"
+    set pythonthreedll=/Library/Frameworks/Python.framework/Versions/3.5/lib/libpython3.5m.dylib
+  else
+    set transparency=7
   endif
 else
   let g:CSApprox_loaded = 1
@@ -536,7 +540,7 @@ augroup vimrc-python
 augroup END
 
 " jedi-vim
-let g:jedi#popup_on_dot = 0
+let g:jedi#popup_on_dot = 1
 let g:jedi#goto_assignments_command = "<leader>g"
 let g:jedi#goto_definitions_command = "<leader>d"
 let g:jedi#documentation_command = "K"
@@ -617,11 +621,11 @@ let g:tagbar_type_ruby = {
     \ ]
 \ }
 
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+" RSpec.vim mappings:
+" map <Leader>t :call RunCurrentSpecFile()<CR>
+" map <Leader>s :call RunNearestSpec()<CR>
+" map <Leader>l :call RunLastSpec()<CR>
+" map <Leader>a :call RunAllSpecs()<CR>
 
 " Ruby refactory
 nnoremap <leader>rap  :RAddParameter<cr>
