@@ -12,13 +12,22 @@ PATHS=(
   /usr/local/sbin
   /usr/sbin
   /sbin
+  /usr/local/opt/go/libexec/bin
   ~/.pyenv
   ~/.pyenv/bin
+  ~/.fastlane/bin
+  ~/.go
+  ~/.go/bin
+
 )
 
 export PATH=$(csp ${PATHS[@]})
-export EDITOR='mvim'
+export EDITOR='nvim'
 export GIT_EDITOR=mvim
+
+# go
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME/.go
 
 
 # export LC_ALL=en_US.UTF-8
@@ -85,6 +94,7 @@ source ~/.alias-docker.zsh
 
 #Recursive delete .DS_Store files
 alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
+alias django_cleanup_migrations="find . -name 'migrations' -type d -ls -exec rm -rv {} +"
 
 #Empty the trash on all mounted volumes and the main HDD. then clear the useless sleepimage
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash; sudo rm /private/var/vm/sleepimage"
@@ -122,3 +132,5 @@ alias v="vim"
 alias ungz="gunzip -k"
 alias fs="stat -f \"%z bytes\""
 
+#postgres
+alias postgres.server="pg_ctl -D ~/Library/Application\ Support/Postgres/var-10"
