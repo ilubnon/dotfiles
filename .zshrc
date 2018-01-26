@@ -133,4 +133,4 @@ alias ungz="gunzip -k"
 alias fs="stat -f \"%z bytes\""
 
 #postgres
-alias postgres.server="pg_ctl -D ~/Library/Application\ Support/Postgres/var-10"
+alias psql.server="pg_ctl -D ~/Library/Application\ Support/Postgres/var-10"
