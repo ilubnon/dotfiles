@@ -12,10 +12,10 @@ The distribution is designed to work with Vim >= 7.2.
 #### Mac OSX
 
 	$ brew install git ctags
-	$ brew install cpanminus 
-	$ sudo cpanm Net::SMTP::SSL 
+	$ brew install cpanminus
+	$ sudo cpanm Net::SMTP::SSL
 
-  
+
 
 #### Linux
 
@@ -109,8 +109,10 @@ Commands | Descriptions
 `,d` | Go to the Class/Method definition
 `,r` | Rename object definition
 `,n` | Show where command is usage
+`<F9>` | Exec python script in buffer
 
 ## Ruby hotkeys
+
 Commands | Descriptions
     ------- | -------
 `,a`        | Run all specs
@@ -126,7 +128,7 @@ Commands | Descriptions
 `,rriv`     | Rename Instance Variable  (visual selection)
 `,rem`      | Extract Method            (visual selection)
 
-## Using vim-bootstrap 
+## Using vim-bootstrap
 
 * Download your own vimrc file at http://www.vim-bootstrap.com
 * Put your vimrc file into home folder or `$XDG_CONFIG_HOME/nvim/init.vim` if you use NeoVim
@@ -154,4 +156,3 @@ Vim-bootstrap generator can accept URL params via request as example below.
 
     :VimBootstrapUpdate (thanks to @sherzberg)
     :PlugInstall
-
