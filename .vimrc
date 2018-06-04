@@ -58,6 +58,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'SyntaxRange'
 Plug 'tybenz/vimdeck'
 Plug 'ingo-library'
+Plug 'todo-vim'
 
 let g:make = 'gmake'
 if system('uname -o') =~ '^GNU/'
@@ -524,6 +525,9 @@ nnoremap <Leader>o :.Gbrowse<CR>
 
 "" Custom configs
 imap jj <Esc>
+
+"" Todo
+nmap <F5> :TODOToggle<CR>
 
 
 let erlang_folding = 1
