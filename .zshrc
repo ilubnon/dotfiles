@@ -23,7 +23,7 @@ PATHS=(
 
 export PATH=$(csp ${PATHS[@]})
 export EDITOR='nvim'
-export GIT_EDITOR=mvim
+export GIT_EDITOR=nvim
 
 # go
 export GOROOT=/usr/local/opt/go/libexec
@@ -133,4 +133,4 @@ alias ungz="gunzip -k"
 alias fs="stat -f \"%z bytes\""
 
 #postgres
-alias psql.server="pg_ctl -D ~/Library/Application\ Support/Postgres/var-10"
+alias psql.server="pg_ctl -D /usr/local/var/postgres"
