@@ -47,16 +47,20 @@ class Color:
 class Powerline:
     symbols = {
         'compatible': {
-            'separator': '\uE0B0',
-            'separator_thin': '\uE0B1'
+            'separator': '\u25B6',
+            'separator_thin': '\u276F'
         },
         'patched': {
-            'separator': '\uE0B0',
-            'separator_thin': '\uE0B1'
+            'separator': '\u2B80',
+            'separator_thin': '\u2B81'
+        },
+        'konsole': {
+            'separator': '\ue0b0',
+            'separator_thin': '\ue0b1'
         },
         'default': {
-            'separator': '',
-            'separator_thin': ''
+            'separator': '⮀',
+            'separator_thin': '⮁'
         }
     }
     LSQESCRSQ = '\\[\\e%s\\]'
@@ -111,8 +115,7 @@ class Segment:
             self.separator))
 
 
-def add_cwd_segment(powerline, cwd, maxdepth, cwd_only=False):
-    #powerline.append(' \\w ', 15, 237)
+def add_cwd_segment(powerline, cwd, maxdepth, cwd_only=False, hostname=False):
     home = os.getenv('HOME')
     cwd = os.getenv('PWD')
 
@@ -125,6 +128,9 @@ def add_cwd_segment(powerline, cwd, maxdepth, cwd_only=False):
     names = cwd.split('/')
     if len(names) > maxdepth:
         names = names[:2] + ['⋯ '] + names[2 - maxdepth:]
+
+    if hostname:
+        powerline.append(Segment(powerline, ' %m ' , Color.CWD_FG, Color.PATH_BG, powerline.separator_thin, Color.SEPARATOR_FG))
 
     if not cwd_only:
         for n in names[:-1]:
@@ -173,7 +179,13 @@ def get_git_status():
     has_pending_commits = True
     has_untracked_files = False
     origin_position = ""
-    output = subprocess.Popen(['git', 'status', '-unormal'], stdout=subprocess.PIPE).communicate()[0]
+
+    output = subprocess.Popen(
+      ['git', 'status', '-unormal'],
+      stdout=subprocess.PIPE,
+      stderr=subprocess.STDOUT
+    ).communicate()[0]
+
     for line in output.decode(encoding).split('\n'):
         origin_status = re.findall("Your branch is (ahead|behind).*?(\d+) comm", line)
         if len(origin_status) > 0:
@@ -191,7 +203,6 @@ def get_git_status():
 
 
 def add_git_segment(powerline, cwd):
-    #cmd = "git branch 2> /dev/null | grep -e '\\*'"
     p = subprocess.Popen(['git', 'symbolic-ref', '-q', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
 
@@ -201,7 +212,7 @@ def add_git_segment(powerline, cwd):
     if out:
         branch = out[len('refs/heads/'):].rstrip()
     else:
-        branch = '(Detached)'
+        branch = b'(Detached)'
 
     branch = branch.decode(encoding)
     has_pending_commits, has_untracked_files, origin_position = get_git_status()
@@ -216,9 +227,8 @@ def add_git_segment(powerline, cwd):
         bg = Color.REPO_DIRTY_BG
         fg = Color.REPO_DIRTY_FG
 
-    powerline.append(Segment(powerline, ' %s ' % branch, fg, bg))
+    powerline.append(Segment(powerline, '%s' % branch, fg, bg))
     return True
-
 
 def add_svn_segment(powerline, cwd):
     if not os.path.exists(os.path.join(cwd, '.svn')):
@@ -237,9 +247,8 @@ def add_svn_segment(powerline, cwd):
         '!' item is missing (removed by non-svn command) or incomplete
          '~' versioned item obstructed by some item of a different kind
     '''
-    #TODO: Color segment based on above status codes
+    # TODO: Color segment based on above status codes
     try:
-        #cmd = '"svn status | grep -c "^[ACDIMRX\\!\\~]"'
         p1 = subprocess.Popen(['svn', 'status'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         p2 = subprocess.Popen(['grep', '-c', '^[ACDIMRX\\!\\~]'], stdin=p1.stdout, stdout=subprocess.PIPE)
         output = p2.communicate()[0].strip()
@@ -263,11 +272,10 @@ def add_repo_segment(powerline, cwd):
         except OSError:
             pass
 
-
 def add_hostname_segment(powerline):
     bg = Color.CMD_PASSED_BG
     fg = Color.CMD_PASSED_FG
-    powerline.append(Segment(powerline, ' %s ' % platform.node().split(".")[0], fg, bg))
+    powerline.append(Segment(powerline, ' %s ' % platform.node(), fg, bg))
     return True
 
 def add_virtual_env_segment(powerline, cwd):
@@ -289,6 +297,7 @@ def add_root_indicator(powerline, error):
         bg = Color.CMD_FAILED_BG
     powerline.append(Segment(powerline, ' λ', fg, bg))
 
+
 def get_valid_cwd():
     try:
         cwd = os.getcwd()
@@ -309,17 +318,38 @@ def get_valid_cwd():
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument('--cwd-only', action="store_true")
+    arg_parser.add_argument(
+        '--cwd-only',
+        action="store_true",
+        help=(
+            'Hide parent directory'
+        ),
+    )
+    arg_parser.add_argument(
+        '--hostname',
+        action="store_true",
+        help=(
+            'Show hostname at the begin'
+        ),
+    )
     arg_parser.add_argument('prev_error', nargs='?', default=0)
+    arg_parser.add_argument(
+        '-m',
+        default='default',
+        help=(
+            'Choose icon font: default, compatible, patched or konsole.'
+            ' Default is "default"'
+        ),
+        choices=['default', 'compatible', 'patched', 'konsole'],
+        metavar='<mode>'
+    )
     args = arg_parser.parse_args()
 
-    p = Powerline(mode='default')
+    p = Powerline(mode=args.m)
     cwd = get_valid_cwd()
-
-    #ilubnon
-    #add_hostname_segment(p)
+    add_hostname_segment(p)
     add_virtual_env_segment(p, cwd)
-    add_cwd_segment(p, cwd, 5, args.cwd_only)
+    add_cwd_segment(p, cwd, 5, args.cwd_only, args.hostname)
     add_repo_segment(p, cwd)
     add_root_indicator(p, args.prev_error)
     if sys.version_info[0] < 3:
@@ -328,4 +358,3 @@ if __name__ == '__main__':
         sys.stdout.buffer.write(p.draw().encode('utf-8'))
 
 # vim: set expandtab:
-
