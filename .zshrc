@@ -78,9 +78,13 @@ antigen bundle pip
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-# Load the theme.
-#antigen theme robbyrussell/oh-my-zsh themes/half-life
-antigen theme half-life
+# Load the powerlevel 9k
+POWERLEVEL9K_MODE="nerdfont-complete"
+source  ~/.oh-my-zsh/custom/themes/powerlevel9k/powerlevel9k.zsh-theme
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir os_icon vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator pyenv)
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
 antigen apply
 
@@ -95,6 +99,7 @@ source ~/.alias-docker.zsh
 #Recursive delete .DS_Store files
 alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 alias django_cleanup_migrations="find . -name 'migrations' -type d -ls -exec rm -rv {} +"
+alias django_pycache="find . -name '__pycache__' -type d -ls -exec rm -rv {} +"
 
 #Empty the trash on all mounted volumes and the main HDD. then clear the useless sleepimage
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash; sudo rm /private/var/vm/sleepimage"
