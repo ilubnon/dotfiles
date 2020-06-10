@@ -4,7 +4,8 @@
 
 trigger:
   tags:
-    include: 'v*'
+    include:
+      - 'v*'
 
 resources:
 - repo: self
